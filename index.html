@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Carta Bonita</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#ff9a9e; /* warm pink */
+      --bg2:#fad0c4; /* soft peach */
+      --card:#ffffffcc;
+      --accent:#ff4d6d;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06), transparent 3%), linear-gradient(135deg,var(--bg1),var(--bg2));
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color:#222;
+      padding:24px;
+    }
+
+    .scene{
+      width:100%;
+      max-width:880px;
+      position:relative;
+      padding:48px;
+      border-radius:20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      overflow:hidden;
+      backdrop-filter: blur(6px) saturate(120%);
+    }
+
+    h1{
+      font-family:'Great Vibes', cursive;
+      font-size:44px;
+      margin:0 0 10px 0;
+      color:var(--accent);
+      text-shadow: 0 2px 8px rgba(255,77,109,0.18);
+    }
+
+    .subtitle{
+      margin:0 0 22px 0;
+      font-weight:600;
+      color:#444;
+    }
+
+    .letter{
+      background:var(--card);
+      border-radius:14px;
+      padding:22px 26px;
+      line-height:1.5;
+      font-size:18px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      color:#2b2b2b;
+    }
+
+    .signature{
+      margin-top:18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .signature .name{
+      font-family:'Great Vibes', cursive;
+      font-size:26px;
+      color:var(--accent);
+    }
+
+    .hearts{
+      position:absolute;
+      right:18px;
+      bottom:12px;
+      display:flex;
+      gap:8px;
+      pointer-events:none;
+    }
+
+    .heart{
+      width:36px;height:36px;border-radius:50%;
+      display:inline-grid;place-items:center;
+      transform:translateY(0);
+      animation: float 3s infinite;
+      opacity:0.95;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    }
+    .heart:nth-child(1){background:linear-gradient(180deg,#ff8aa0,#ff5b7a); animation-delay:0s}
+    .heart:nth-child(2){background:linear-gradient(180deg,#ffd6d6,#ff9bb3); width:26px;height:26px; animation-delay:0.4s}
+    .heart:nth-child(3){background:linear-gradient(180deg,#fff0f6,#ffc1d6); width:20px;height:20px; animation-delay:0.8s}
+
+    .heart::after{
+      content:'❤';
+      font-size:16px; color:white;
+      transform:translateY(-1px);
+    }
+
+    @keyframes float{
+      0%{transform:translateY(0) scale(1)}
+      50%{transform:translateY(-10px) scale(1.05)}
+      100%{transform:translateY(0) scale(1)}
+    }
+
+    .controls{
+      display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;
+    }
+    .btn{
+      border:0;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer;
+      background:linear-gradient(90deg, rgba(255,77,109,0.95), rgba(255,128,150,0.95));
+      color:white;box-shadow: 0 6px 14px rgba(255,77,109,0.12);
+    }
+
+    .small{font-size:14px;padding:8px 10px}
+
+    /* responsive */
+    @media (max-width:520px){
+      .scene{padding:20px}
+      h1{font-size:34px}
+      .letter{font-size:16px}
+      .heart{right:12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="scene" role="main">
+    <h1>Una carta para ti</h1>
+    <p class="subtitle">Pequeñas palabras con mucho corazón</p>
+
+    <div class="letter" id="letter">
+      Me estoy enamorando de ti y pues aun más cada vez hablamos voy descubriendo tantas cosas de ti que me dejas asombrado, y eso me encanta. Te quiero seguir conociendo porque eres una mujer tan asombrosa, hermosa, inteligente que hasta yo mismo me quedo con la boca abierta.
+
+      <br><br>
+      Yo no sé hacer gran cantidad de cosas, pero ahí voy a estar apoyándote siempre y enamorándome aún más. Yo te ofrezco todo de mí: si no lo sé hacer lo aprendo y lo estudio por ti. Te puedo hacer este tipo de cosas, dibujitos y demostrarte cuánto te amo y te quiero.
+
+      <br><br>
+      Espero no ir muy rápido, pero te quiero conocer demasiado y, si se dan las cosas, presumirte a todo el mundo de la persona tan especial que tengo en mi vida. ;3 T amo
+
+      <div class="signature">
+        <div class="name">Te amo</div>
+      </div>
+    </div>
+
+    
+
+    <div class="hearts" aria-hidden="true">
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+    </div>
+  </div>
+
+  <script>
+    function copyText(){
+      const text = document.getElementById('letter').innerText.trim();
+      navigator.clipboard.writeText(text).then(()=>{
+        alert('Texto copiado al portapapeles.');
+      }).catch(()=>{alert('No se pudo copiar.');});
+    }
+
+    function downloadHTML(){
+      const content = `<!doctype html>\n<html><head><meta charset=\"utf-8\"><title>Carta</title></head><body>${document.getElementById('letter').outerHTML}</body></html>`;
+      const blob = new Blob([content], {type: 'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'carta-romantica.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+
+    let alt=false;
+    function toggleStyle(){
+      alt = !alt;
+      if(alt){
+        document.body.style.background = 'linear-gradient(135deg,#b3ffcc,#e6f7ff)';
+      } else {
+        document.body.style.background = 'linear-gradient(135deg,var(--bg1),var(--bg2))';
+      }
+    }
+  </script>
+</body>
+</html>
